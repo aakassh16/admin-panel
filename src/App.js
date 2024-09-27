@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React, { useState } from 'react';
+import UserList from './components/UserList';
+import UserForm from './components/UserForm';
+import AnalyticsDashboard from './components/AnalyticsDashboard';
+
+const App = () => {
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleEdit = (user) => {
+    setSelectedUser(user);
+  };
+
+  const handleFormSubmit = () => {
+    setSelectedUser(null);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserList onEdit={handleEdit} />
+      <UserForm selectedUser={selectedUser} onSubmit={handleFormSubmit} />
+      <AnalyticsDashboard />
     </div>
   );
-}
+};
+
 
 export default App;
